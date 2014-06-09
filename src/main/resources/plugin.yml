@@ -1,0 +1,57 @@
+name: Gatekeeper
+main: grokswell.gatekeeper.GatekeeperPlugin
+version: 0.1-dev
+description: Easy creation of gates, doorways, portals, and npc gatekeepers to operate them.
+author: Grokswell
+authors: [Grokswell] 
+database: false
+load: POSTWORLD
+softdepend: [Citizens]
+commands:
+   gate:
+      description: Manage gates.
+      usage: /gate
+      permission: gatekeeper.gate
+      permission-message: You do not have permission to use command /gate.
+      aliases: [gatecommand,gc]
+   gatekeeper:
+      description: Manage gatekeeper NPCs.
+      usage: "\n§4/hmerchant §csetshop §a[shopname] §6[--id idnum] §e- Set shop of selected outfitter.
+  	    Set to shop player is standing in if no [shopname] argument provided.\n\n
+  	    §4/hmerchant §coffduty §6[--id idnum] §e- Toggle npc in and out of offduty mode.\n\n
+  	    §4/hmerchant §crental §6[--id idnum] §e- Toggle npc as having a shop for rent. npc must already be assigned to a shop.\n\n
+  	    §4/hmerchant §cforhire §6[--id idnum] §e- Toggle npc as being for hire. npc must not be assigned to a shop.\n\n
+  	    §4/hmerchant §ccomission §a[percent] §6[--id idnum] §e- Set the Merchant's comission, where percent is a number between 0 and 100.\n\n
+        §4/hmerchant §cgreeting §a[welcome message] §6[--id idnum] §e- Set text NPC says upon player interaction.
+  	    Leave [welcome message] argument empty for no text.\n\n
+        §4/hmerchant §cfarewell §a[goodbye message] §6[--id idnum] §e- Set text NPC says upon player closing menu.
+  	    Leave [goodbye message] argument empty for no text.\n\n
+        §4/hmerchant §cdenial §a[deny message] §6[--id idnum] §e- Set text NPC says when player is not permitted to use a shop.
+  	    Leave [deny message] argument empty for no text.\n\n
+  	    §4/hmerchant §cclosed §a[closed message] §6[--id idnum] §e- Set text NPC says to a player when NPC is off duty.
+  	    Leave [closed message] argument empty for no text.\n\n
+  	    §4/hmerchant §clist §e- List information of all existing outfitter NPCs.\n\n
+  	    §4/hmerchant §cinfo §6[--id idnum] §e- Show information of a single outfitter."
+      permission: outfitter.manage
+      permission-message: You do not have permission to use command /hmerchant.
+      aliases: [hmerch]
+    
+permissions:
+   gatekeeper.*:
+      description: Gives access to all outfitter commands
+      children:
+         gatekeeper.menu: true
+         gatekeeper.remote: true
+         gatekeeper.npc: true
+         gatekeeper.manage: true
+         gatekeeper.clerk: true
+         gatekeeper.onduty: true
+   gatekeeper.admin:
+      description: Allow use of the /outfit command.
+      default: true
+   gatekeeper.gate:
+      description: Allow use of the /gate command.
+      default: true
+   gatekeeper.gate.manage:
+      description: Allow use of the /gate management commands.
+      default: false
